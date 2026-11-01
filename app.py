@@ -1,7 +1,6 @@
 import streamlit as st
-
 from PIL import Image, UnidentifiedImageError
-from urllib.parse import urlsplit
+from src.url_analysis import analyze_url
 
 
 # ---------------------------------------
@@ -82,50 +81,28 @@ website_url = st.text_input(
     placeholder="https://example.com"
 )
 
-
 if st.button("Analyze URL"):
-
     if not website_url.strip():
-
         st.warning("Please enter a website URL.")
-
     else:
-
         try:
-            url = website_url.strip()
+            result = analyze_url(website_url)
 
-            parsed_url = urlsplit(url)
+            st.success("URL analysis completed successfully.")
 
-            hostname = parsed_url.hostname
+            st.write("**Extracted Domain:**", result["domain"])
+            st.write("**Domain Length:**", result["domain_length"])
+            st.write("**IP Address:**", result["is_ip_address"])
+            st.write("**Hyphen Count:**", result["hyphen_count"])
+            st.write("**Subdomain Count:**", result["subdomain_count"])
 
-            if (
-                parsed_url.scheme.lower() != "https"
-                or not hostname
-                or parsed_url.username is not None
-                or parsed_url.password is not None
-            ):
-
-                st.warning(
-                    "Invalid or unsupported URL. "
-                    "Enter a complete HTTPS URL."
-                )
-
-            else:
-
-                domain = hostname.lower().rstrip(".")
-
-                st.write("Extracted Domain:", domain)
-
-                st.info(
-                    "URL parsing completed. "
-                    "Brand verification and AI analysis "
-                    "will be developed in later stages."
-                )
+            st.info(
+                "These are basic URL characteristics. "
+                "They do not confirm whether a website is safe or malicious."
+            )
 
         except ValueError:
-
-            st.error("The URL could not be parsed.")
-
+            st.error("Invalid or unsupported URL. Enter a complete HTTPS URL.")
 
 # ---------------------------------------
 # Disclaimer
