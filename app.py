@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image, UnidentifiedImageError
 from src.url_analysis import analyze_url
-
+from src.image_preprocessing import preprocess_image
 
 # ---------------------------------------
 # Application Configuration
@@ -47,28 +47,50 @@ uploaded_file = st.file_uploader(
 )
 
 if uploaded_file is not None:
-
     try:
         image = Image.open(uploaded_file)
+        image.load()
+
+        st.subheader("Original Screenshot")
 
         st.image(
             image,
-            caption="Uploaded Website Screenshot",
+            caption="Original Website Screenshot",
             use_container_width=True
         )
 
-        st.success("Screenshot loaded successfully.")
+        st.write("Original Width:", image.width)
+        st.write("Original Height:", image.height)
+        st.write("Original Color Mode:", image.mode)
 
-        st.write("Image width:", image.width)
-        st.write("Image height:", image.height)
+        # Preprocess screenshot
+        processed_image = preprocess_image(image)
 
-    except (UnidentifiedImageError, OSError):
+        st.subheader("Preprocessed Screenshot")
 
-        st.error(
-            "Unable to open this image. "
-            "Please upload a valid PNG or JPEG file."
+        st.image(
+            processed_image,
+            caption="Preprocessed Website Screenshot",
+            use_container_width=True
         )
 
+        st.success("Image preprocessing completed successfully.")
+
+        st.write("Processed Width:", processed_image.width)
+        st.write("Processed Height:", processed_image.height)
+        st.write("Processed Color Mode:", processed_image.mode)
+
+        st.info(
+            "Image preprocessing prepares screenshots for future "
+            "OCR and computer vision analysis. "
+            "It does not detect phishing websites."
+        )
+
+    except (UnidentifiedImageError, OSError, ValueError):
+        st.error(
+            "Unable to process this image. "
+            "Please upload a valid PNG or JPEG file."
+        )
 
 # ---------------------------------------
 # URL Inspection
