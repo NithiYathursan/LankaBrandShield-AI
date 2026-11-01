@@ -2,7 +2,8 @@ import streamlit as st
 from PIL import Image, UnidentifiedImageError
 from src.url_analysis import analyze_url
 from src.image_preprocessing import preprocess_image
-
+from src.ui.styles import apply_custom_styles
+from src.ui.navigation import render_sidebar
 # ---------------------------------------
 # Application Configuration
 # ---------------------------------------
@@ -13,7 +14,8 @@ st.set_page_config(
     layout="wide"
 )
 
-
+apply_custom_styles()
+selected_page = render_sidebar()
 # ---------------------------------------
 # Application Header
 # ---------------------------------------
