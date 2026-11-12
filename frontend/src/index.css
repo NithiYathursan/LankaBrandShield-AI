@@ -2,11 +2,12 @@
 
 :root {
   font-family: Inter, system-ui, Arial, sans-serif;
-  color: #f1f3ee;
-  background: #5b8d7c;
+  color: #242137;
+  background: #f8f7fc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
@@ -17,6 +18,16 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 #root {

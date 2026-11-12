@@ -14,12 +14,12 @@ function App() {
       {activePage === "Dashboard" ? (
         <Dashboard />
       ) : (
-        <section className="rounded-2xl border border-slate-800 bg-[#111c2d] p-8">
-          <h1 className="text-2xl font-semibold text-white">
+        <section className="rounded-2xl border border-[#e9e6f0] bg-white p-8 shadow-sm">
+          <h1 className="text-2xl font-semibold text-[#242137]">
             {activePage}
           </h1>
 
-          <p className="mt-3 text-slate-400">
+          <p className="mt-3 text-sm leading-7 text-[#77738a]">
             This module is currently under development.
             Its functionality will be integrated in a future session.
           </p>

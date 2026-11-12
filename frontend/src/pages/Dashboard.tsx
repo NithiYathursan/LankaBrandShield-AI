@@ -1,8 +1,10 @@
 
 import {
   Activity,
+  ArrowUpRight,
   Database,
   Globe,
+  History,
   ScanSearch,
   ShieldCheck,
 } from "lucide-react";
@@ -10,62 +12,82 @@ import {
 const capabilities = [
   {
     title: "URL Intelligence",
-    description: "Inspect domain structure and URL characteristics.",
+    description:
+      "Analyze suspicious website addresses and identify potential brand impersonation indicators.",
     icon: Globe,
-    status: "Backend integration pending",
   },
   {
     title: "Visual Inspection",
-    description: "Prepare screenshots for future visual analysis.",
+    description:
+      "Prepare and inspect visual content for future logo and brand similarity analysis.",
     icon: ScanSearch,
-    status: "Backend integration pending",
   },
   {
     title: "Scan History",
-    description: "Review previous analyses after database integration.",
-    icon: Database,
-    status: "Database integration pending",
+    description:
+      "Review previously analyzed items once persistent scan storage is integrated.",
+    icon: History,
   },
+];
+
+const integrations = [
+  { name: "React Frontend", status: "Ready", ready: true },
+  { name: "FastAPI Integration", status: "Pending", ready: false },
+  { name: "PostgreSQL Database", status: "Pending", ready: false },
+  { name: "AI Detection Models", status: "Planned", ready: false },
 ];
 
 export default function Dashboard() {
   return (
-    <div className="space-y-8">
-      <section className="rounded-3xl border border-emerald-400/20 bg-gradient-to-br from-[#293a31] to-[#1c211f] p-8 md:p-10">
-        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-xs font-semibold text-emerald-300">
-          <ShieldCheck size={16} />
-          SECURITY INTELLIGENCE WORKSPACE
-        </div>
-
-        <h1 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-          Brand Protection Intelligence
-        </h1>
-
-        <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-400">
-          A developing platform for website URL inspection,
-          screenshot preprocessing, and future brand
-          impersonation screening.
+    <div className="space-y-7">
+      <div>
+        <p className="text-sm font-medium text-[#7555e8]">
+          Security Overview
         </p>
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#242137]">
+          Welcome to your workspace
+        </h1>
+        <p className="mt-2 text-sm text-[#77738a]">
+          Manage and explore your brand protection capabilities.
+        </p>
+      </div>
 
-        <div className="mt-7 flex flex-wrap gap-3">
-          <span className="rounded-xl bg-emerald-400 px-5 py-3 text-sm font-semibold text-slate-950">
-            React Frontend Active
-          </span>
+      <section className="relative overflow-hidden rounded-3xl border border-[#e5defb] bg-[#ede8ff] p-7 md:p-9">
+        <div className="relative z-10 max-w-2xl">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-white/75 px-3 py-1.5 text-xs font-semibold text-[#7555e8]">
+            <ShieldCheck size={15} />
+            AI-Powered Brand Protection
+          </div>
 
-          <span className="rounded-xl border border-slate-600 px-5 py-3 text-sm text-slate-300">
-            API Integration Pending
-          </span>
+          <h2 className="text-2xl font-bold tracking-tight text-[#242137] md:text-3xl">
+            A smarter workspace for digital brand security
+          </h2>
+
+          <p className="mt-4 max-w-xl text-sm leading-7 text-[#625b78]">
+            LankaBrandShield AI is being developed to support
+            suspicious URL analysis, visual brand inspection,
+            and impersonation risk assessment.
+          </p>
+
+          <div className="mt-6 inline-flex items-center gap-2 rounded-xl border border-[#dcd2fa] bg-white px-4 py-2.5 text-sm font-medium text-[#7555e8]">
+            <Activity size={17} />
+            Platform under development
+          </div>
         </div>
+
+        <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-[#d9ceff] opacity-60 blur-3xl" />
       </section>
 
       <section>
-        <div className="mb-5">
-          <h2 className="text-xl font-semibold text-white">
-            Platform Capabilities
-          </h2>
-          <p className="mt-1 text-sm text-slate-400">
-            Development modules and planned integrations
-          </p>
+        <div className="mb-5 flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-semibold text-[#242137]">
+              Platform Modules
+            </h2>
+            <p className="mt-1 text-sm text-[#77738a]">
+              Core capabilities planned for the platform.
+            </p>
+          </div>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -75,24 +97,31 @@ export default function Dashboard() {
             return (
               <article
                 key={item.title}
-                className="rounded-2xl border border-stone-800 bg-[#252b28] p-6 transition hover:border-emerald-400/30"
+                className="group rounded-2xl border border-[#e9e6f0] bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
               >
-                <div className="inline-flex rounded-xl bg-emerald-400/10 p-3 text-emerald-400">
-                  <Icon size={24} />
+                <div className="flex items-start justify-between">
+                  <div className="rounded-xl bg-[#ede8ff] p-3">
+                    <Icon size={23} className="text-[#7555e8]" />
+                  </div>
+
+                  <ArrowUpRight
+                    size={18}
+                    className="text-[#aaa5b7] transition-colors group-hover:text-[#7555e8]"
+                  />
                 </div>
 
-                <h3 className="mt-6 text-lg font-semibold text-white">
+                <h3 className="mt-6 text-lg font-semibold text-[#242137]">
                   {item.title}
                 </h3>
 
-                <p className="mt-3 min-h-14 text-sm leading-6 text-slate-400">
+                <p className="mt-3 text-sm leading-6 text-[#77738a]">
                   {item.description}
                 </p>
 
-                <div className="mt-5 border-t border-stone-800 pt-4">
-                  <p className="text-xs font-medium text-amber-300">
-                    {item.status}
-                  </p>
+                <div className="mt-6 border-t border-[#f0edf5] pt-4">
+                  <span className="rounded-full bg-[#f4f1ff] px-3 py-1 text-xs font-medium text-[#7555e8]">
+                    In Development
+                  </span>
                 </div>
               </article>
             );
@@ -100,59 +129,72 @@ export default function Dashboard() {
         </div>
       </section>
 
-      <section className="grid gap-5 xl:grid-cols-2">
-        <div className="rounded-2xl border border-stone-800 bg-[#252b28] p-7">
+      <div className="grid gap-5 xl:grid-cols-2">
+        <section className="rounded-2xl border border-[#e9e6f0] bg-white p-6 shadow-sm">
           <div className="flex items-center gap-3">
-            <Activity size={22} className="text-emerald-400" />
-            <h3 className="text-lg font-semibold text-white">
-              Recent Activity
-            </h3>
+            <div className="rounded-xl bg-[#f4f1ff] p-3">
+              <Activity size={20} className="text-[#7555e8]" />
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold text-[#242137]">
+                Recent Activity
+              </h2>
+              <p className="text-xs text-[#77738a]">
+                Latest platform scan activity
+              </p>
+            </div>
           </div>
 
-          <div className="mt-7 rounded-xl border border-dashed border-slate-700 p-10 text-center">
-            <p className="font-medium text-slate-300">
-              No scan records available
+          <div className="mt-6 flex min-h-40 flex-col items-center justify-center rounded-xl border border-dashed border-[#e9e6f0] bg-[#fcfbfe] p-6 text-center">
+            <History size={28} className="text-[#b4a7e7]" />
+            <p className="mt-3 text-sm font-medium text-[#242137]">
+              No scan activity yet
             </p>
-            <p className="mt-2 text-sm text-slate-500">
-              Activity will appear after backend and database integration.
+            <p className="mt-2 text-xs text-[#77738a]">
+              Scan records will appear here after backend integration.
             </p>
           </div>
-        </div>
+        </section>
 
-        <div className="rounded-2xl border border-stone-800 bg-[#252b28] p-7">
-          <h3 className="text-lg font-semibold text-white">
-            System Integration
-          </h3>
+        <section className="rounded-2xl border border-[#e9e6f0] bg-white p-6 shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="rounded-xl bg-[#f4f1ff] p-3">
+              <Database size={20} className="text-[#7555e8]" />
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold text-[#242137]">
+                System Integration
+              </h2>
+              <p className="text-xs text-[#77738a]">
+                Current development progress
+              </p>
+            </div>
+          </div>
 
-          <div className="mt-7 space-y-4">
-            {[
-              ["React Frontend", "Ready"],
-              ["FastAPI Backend", "Pending"],
-              ["PostgreSQL Database", "Pending"],
-              ["AI Detection Models", "Planned"],
-            ].map(([name, status]) => (
+          <div className="mt-6 space-y-3">
+            {integrations.map((item) => (
               <div
-                key={name}
-                className="flex items-center justify-between gap-3 border-b border-stone-800 pb-4 last:border-0"
+                key={item.name}
+                className="flex items-center justify-between gap-3 rounded-xl bg-[#f8f7fc] px-4 py-3"
               >
-                <span className="text-sm text-slate-300">
-                  {name}
+                <span className="text-sm font-medium text-[#393448]">
+                  {item.name}
                 </span>
 
                 <span
-                  className={`text-xs font-semibold ${
-                    status === "Ready"
-                      ? "text-emerald-400"
-                      : "text-amber-300"
+                  className={`rounded-full px-3 py-1 text-xs font-medium ${
+                    item.ready
+                      ? "bg-[#e8f7ed] text-[#267347]"
+                      : "bg-[#f0edf5] text-[#77738a]"
                   }`}
                 >
-                  {status}
+                  {item.status}
                 </span>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }

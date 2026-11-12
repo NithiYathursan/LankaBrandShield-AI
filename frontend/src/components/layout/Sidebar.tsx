@@ -1,3 +1,4 @@
+
 import {
   BarChart3,
   Building2,
@@ -40,26 +41,26 @@ export default function Sidebar({
           type="button"
           aria-label="Close navigation"
           onClick={onClose}
-          className="fixed inset-0 z-30 bg-black/60 lg:hidden"
+          className="fixed inset-0 z-30 bg-black/30 lg:hidden"
         />
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-72 flex-col border-r border-stone-800 bg-[#1c211f] transition-transform duration-300 lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex w-72 flex-col border-r border-[#e9e6f0] bg-white transition-transform duration-300 lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between border-b border-stone-800 px-6 py-7">
+        <div className="flex items-center justify-between border-b border-[#e9e6f0] px-6 py-7">
           <div className="flex items-center gap-3">
-            <div className="rounded-xl bg-emerald-400/10 p-3">
-              <ShieldCheck className="h-7 w-7 text-emerald-400" />
+            <div className="rounded-xl bg-[#ede8ff] p-3">
+              <ShieldCheck className="h-7 w-7 text-[#7555e8]" />
             </div>
 
             <div>
-              <h1 className="text-lg font-bold text-white">
+              <h1 className="text-lg font-bold text-[#242137]">
                 LankaBrandShield
               </h1>
-              <p className="text-xs font-medium tracking-widest text-emerald-400">
+              <p className="text-xs font-semibold tracking-widest text-[#7555e8]">
                 AI PLATFORM
               </p>
             </div>
@@ -69,14 +70,14 @@ export default function Sidebar({
             type="button"
             aria-label="Close sidebar"
             onClick={onClose}
-            className="text-slate-400 hover:text-white lg:hidden"
+            className="text-[#77738a] hover:text-[#242137] lg:hidden"
           >
             <X size={20} />
           </button>
         </div>
 
         <nav aria-label="Main navigation" className="flex-1 px-4 py-7">
-          <p className="mb-4 px-4 text-xs font-semibold uppercase tracking-widest text-slate-500">
+          <p className="mb-4 px-4 text-xs font-semibold uppercase tracking-widest text-[#9994a8]">
             Workspace
           </p>
 
@@ -96,8 +97,8 @@ export default function Sidebar({
                   aria-current={active ? "page" : undefined}
                   className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium transition-all ${
                     active
-                      ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-300"
-                      : "text-slate-400 hover:bg-stone-800 hover:text-white"
+                      ? "bg-[#ede8ff] text-[#7555e8]"
+                      : "text-[#77738a] hover:bg-[#f8f7fc] hover:text-[#242137]"
                   }`}
                 >
                   <Icon size={19} />
@@ -108,12 +109,12 @@ export default function Sidebar({
           </div>
         </nav>
 
-        <div className="border-t border-stone-800 p-5">
-          <div className="rounded-xl border border-slate-700 bg-[#252b28] p-4">
-            <p className="text-sm font-semibold text-white">
+        <div className="border-t border-[#e9e6f0] p-5">
+          <div className="rounded-xl border border-[#e9e6f0] bg-[#f8f7fc] p-4">
+            <p className="text-sm font-semibold text-[#242137]">
               Development Environment
             </p>
-            <p className="mt-2 text-xs leading-5 text-slate-400">
+            <p className="mt-2 text-xs leading-5 text-[#77738a]">
               Frontend development in progress.
             </p>
           </div>
