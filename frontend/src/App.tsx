@@ -2,7 +2,7 @@
 import { useState } from "react";
 import MainLayout from "./components/layout/MainLayout";
 import Dashboard from "./pages/Dashboard";
-
+import URLIntelligence from "./pages/URLIntelligence";
 function App() {
   const [activePage, setActivePage] = useState("Dashboard");
 
@@ -13,7 +13,8 @@ function App() {
     >
       {activePage === "Dashboard" ? (
         <Dashboard />
-      ) : (
+      )  : activePage === "URL Intelligence" ? (
+        <URLIntelligence />): (
         <section className="rounded-2xl border border-[#e9e6f0] bg-white p-8 shadow-sm">
           <h1 className="text-2xl font-semibold text-[#242137]">
             {activePage}
