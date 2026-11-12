@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  font-family: Inter, system-ui, sans-serif;
-  color: #e2e8f0;
-  background: #080e1a;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  color: #f1f3ee;
+  background: #5b8d7c;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
