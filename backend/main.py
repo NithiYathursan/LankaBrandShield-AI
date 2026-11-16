@@ -8,7 +8,9 @@ from PIL import Image, UnidentifiedImageError
 
 from src.image_preprocessing import preprocess_image
 from src.url_analysis import analyze_url
-
+import pytesseract
+from fastapi import Form
+from src.ocr_extraction import extract_text
 
 app = FastAPI(
     title="LankaBrandShield AI API",
@@ -110,6 +112,77 @@ async def preprocess_image_endpoint(file: UploadFile = File(...)):
             raise HTTPException(
                 status_code=400,
                 detail="Unable to process the uploaded image.",
+            ) from exc
+
+    finally:
+        await file.close()
+
+@app.post("/api/extract-text")
+async def extract_text_endpoint(
+    file: UploadFile = File(...),
+    languages: str = Form("eng"),
+):
+    allowed_languages = {"eng", "sin", "tam"}
+    selected = languages.split("+")
+
+    if not selected or any(
+        lang not in allowed_languages for lang in selected
+    ):
+        raise HTTPException(
+            status_code=400,
+            detail="Unsupported OCR language.",
+        )
+
+    try:
+        if file.content_type not in {"image/png", "image/jpeg"}:
+            raise HTTPException(
+                status_code=400,
+                detail="Only PNG and JPEG images are supported.",
+            )
+
+        contents = await file.read(MAX_UPLOAD_BYTES + 1)
+
+        if len(contents) > MAX_UPLOAD_BYTES:
+            raise HTTPException(
+                status_code=413,
+                detail="Image exceeds the 5 MB upload limit.",
+            )
+
+        try:
+            with Image.open(BytesIO(contents)) as image:
+                if image.format not in ALLOWED_IMAGE_FORMATS:
+                    raise HTTPException(
+                        status_code=400,
+                        detail="Invalid image format.",
+                    )
+
+                result = extract_text(
+                    image,
+                    languages=languages,
+                )
+
+                return {
+                    "filename": file.filename,
+                    **result,
+                    "message": "OCR extraction completed.",
+                }
+
+        except (UnidentifiedImageError, OSError, ValueError) as exc:
+            raise HTTPException(
+                status_code=400,
+                detail="Unable to process the uploaded image.",
+            ) from exc
+
+        except pytesseract.TesseractError as exc:
+            raise HTTPException(
+                status_code=503,
+                detail="OCR engine could not process the image.",
+            ) from exc
+
+        except pytesseract.TesseractNotFoundError as exc:
+            raise HTTPException(
+                status_code=503,
+                detail="Tesseract OCR is not installed or accessible.",
             ) from exc
 
     finally:
