@@ -5,7 +5,7 @@ from fastapi import FastAPI, HTTPException, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from PIL import Image, UnidentifiedImageError
-
+from backend.brand_registry import list_brands
 from src.image_preprocessing import preprocess_image
 from src.url_analysis import analyze_url
 import pytesseract
@@ -187,3 +187,7 @@ async def extract_text_endpoint(
 
     finally:
         await file.close()
+
+@app.get("/api/brands")
+def get_brands():
+    return {"brands": list_brands()}
